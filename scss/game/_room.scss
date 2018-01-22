@@ -1,0 +1,44 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 18px Helvetica, Arial; }
+      form {
+        text-align: center;
+      }
+      form input { color: white; background: transparent; border: 0; border-bottom: 1px solid white; outline: 0; padding: 10px; width: 35%; margin-right: 10px; text-align: left; }
+      form button { width: 12%; color: white; background: transparent; border: 1px solid white;; padding: 10px 20px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      
+      h1 { 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-family: 'Joti One', cursive; 
+        font-size: 100px;
+        line-height: 0.9;
+        text-align: center;
+        transform: translate(-50%, -50%) rotate(-5deg);
+      }
+
+      h1 div {
+        font-size: 50px;
+      }
+
+      body {
+        background-color: #D8D5DB;
+      }
+
+      .insult-wrapper button {
+        appearance: none;
+        background: $primary-color;
+        border: 0;
+        padding: 10px 20px;
+        font-size: 20px;
+        transition: 0.3s;
+
+        &.disabled {
+          background: $font-color;
+          opacity: 0.5;
+          pointer-events: none;
+        }
+      }

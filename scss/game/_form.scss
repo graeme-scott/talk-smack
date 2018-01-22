@@ -1,0 +1,60 @@
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.98);
+  transition: 0.3s;
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  h1 {
+    position: static;
+    transform: rotate(-5deg);
+    color: white;
+    margin-bottom: 90px;
+  }
+}
+
+form {
+  position: absolute;
+  width: 600px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.word-selector {
+  position: absolute;
+  width: 100%;
+  bottom: 25px;
+  text-align: center;
+}
+
+.word {
+  display: inline-block;
+  border: 1px solid $font-color;
+  padding: 5px 10px;
+  margin: 10px 10px 25px;
+
+  &.selected {
+    background: rgba($primary-color, 0.2);
+    pointer-events: none;
+  }
+}
+
+.insult-wrapper {
+  position: absolute;
+  width: 100%;
+  bottom: 140px;
+  text-align: center;
+}
+
+.insult-container {
+  height: 40px;
+  margin-bottom: 20px;
+}

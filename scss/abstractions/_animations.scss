@@ -1,0 +1,78 @@
+@keyframes add-player {
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes reveal-avatar {
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes show-name {
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes blink-1 {
+  20% {
+    height: 10px;
+    transform: translateY(0) scaleY(1);
+  }
+  23%{
+    height: 0;
+    transform: translateY(5px);
+  }
+  26% {
+    height: 10px;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes blink-2 {
+  20% {
+    height: 8px;
+    transform: translateY(0) scaleY(1);
+  }
+  23%{
+    height: 0;
+    transform: translateY(4px);
+  }
+  26% {
+    height: 8px;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes blink-3 {
+  50% {
+    height: 5px;
+    transform: translateY(0) scaleY(1);
+  }
+  53%{
+    height: 0;
+    transform: translateY(2px);
+  }
+  56% {
+    height: 5px;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes blink-4 {
+  50% {
+    height: 6px;
+    transform: translateY(0) scaleY(1);
+  }
+  53%{
+    height: 0;
+    transform: translateY(3px);
+  }
+  56% {
+    height: 6px;
+    transform: translateY(0) scaleY(1);
+  }
+}

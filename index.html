@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Talk Smack!</title>
+    <link href="https://fonts.googleapis.com/css?family=Joti+One" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>
+      <div>Talk</div>
+      Smack!
+    </h1>
+
+    <div class="player-container"></div>
+
+    <div class="word-selector"></div>
+
+    <div class="insult-wrapper">
+      <h2>You're a</h2>
+      <div class="insult-container"></div>
+      <button class="submit">Talk smack!</button>
+    </div>
+
+    <div class="modal">
+      <form>
+        <h1>
+          <div>Talk</div>
+          Smack!
+        </h1>
+
+        <input id="m" autocomplete="off" placeholder="Enter your name" />
+        <button>Enter</button>
+      </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const words = {
+        "nouns": [
+          "head",
+          "butt",
+          "nose",
+          "neck",
+          "man",
+          "girl",
+          "lady",
+          "dude",
+          "boy",
+          "wrench",
+          "pickle",
+          "dingus",
+          "tool",
+          "face",
+          "nose",
+          "mouth",
+          "muscle",
+          "milk",
+          "butter",
+          "egg",
+          "salad",
+          "meat",
+          "dish",
+          "rag",
+          "pizza",
+          "handle",
+          "rubber",
+          "balloon",
+          "zipper",
+          "nub",
+          "chin",
+          "hair",
+          
+        ],
+        "verbs": [
+          "dance",
+          "drive",
+          "sign",
+          "wash",
+          "drink",
+          "cut",
+          "fed",
+          "watch",
+          "wash",
+          "eat",
+          "pick",
+          "hunt",
+          "smell",
+          "feel",
+          "embrace"
+        ],
+        "adjectives": [
+          "wet",
+          "smelly",
+          "dirty",
+          "angry",
+          "hungry",
+          "sad",
+          "little",
+          "small",
+          "thin",
+          "minature",
+          "sweaty",
+          "swollen",
+          "cold",
+          "frozen",
+          "bad",
+          "electric",
+          "gross",
+          "weird",
+          "strange",
+          "mysterious",
+          "ugly",
+          "stupid",
+          "soft",
+          "salty"
+        ]
+      };
+
+      const questions = [
+        'You\'re a ',
+        'I heard you like to',
+        'You smell like ',
+        'I hate your '
+      ];
+
+      const socket = io();
+      const wordSelector = document.querySelector('.word-selector');
+      const insultContainer = document.querySelector('.insult-container');
+
+      function loadWords() {
+        wordSelector.innerHTML = '';
+
+        document.querySelector('.insult-wrapper h2').innerHTML = questions[Math.floor(Math.random() * questions.length)];
+
+        for (let i = 0; i < 4; i++) {
+          const word = document.createElement('div');
+          word.classList.add('word');
+          word.dataset.index = `nouns-${i}`; 
+          word.innerHTML = words.nouns[Math.floor(Math.random() * words.nouns.length)];
+          wordSelector.appendChild(word);
+
+          word.addEventListener('click', (e) => {
+            if (!e.currentTarget.classList.contains('selected')) {
+              const selectedWord = e.currentTarget.cloneNode(true);
+              e.currentTarget.classList.add('selected');
+
+              insultContainer.appendChild(selectedWord);
+              document.querySelector('.insult-wrapper button').classList.remove('diabled');
+
+              selectedWord.addEventListener('click', (e) => {
+                const $target = e.currentTarget;
+                const id = $target.dataset.index;
+                $target.outerHTML = "";
+                delete $target;
+
+                document.querySelector(`.word-selector [data-index=${id}]`).classList.remove('selected');
+
+                if (document.querySelectorAll('.word-selector [data-index]').length === 0) {
+                  document.querySelector('.insult-wrapper button').classList.add('diabled');
+                }
+              });
+            }
+          });
+        }
+
+        for (let i = 0; i < 2; i++) {
+          const word = document.createElement('div');
+          word.classList.add('word');
+          word.dataset.index = `verbs-${i}`; 
+          word.innerHTML = words.verbs[Math.floor(Math.random() * words.verbs.length)];
+          wordSelector.appendChild(word);
+
+          word.addEventListener('click', (e) => {
+            if (!e.currentTarget.classList.contains('selected')) {
+              const selectedWord = e.currentTarget.cloneNode(true);
+              e.currentTarget.classList.add('selected');
+
+              insultContainer.appendChild(selectedWord);
+              document.querySelector('.insult-wrapper button').classList.remove('diabled');
+
+              selectedWord.addEventListener('click', (e) => {
+                const $target = e.currentTarget;
+                const id = $target.dataset.index;
+                $target.outerHTML = "";
+                delete $target;
+
+                document.querySelector(`.word-selector [data-index=${id}]`).classList.remove('selected');
+
+                if (document.querySelectorAll('.word-selector [data-index]').length === 0) {
+                  document.querySelector('.insult-wrapper button').classList.add('diabled');
+                }
+              });
+            }
+          });
+        }
+
+        for (let i = 0; i < 4; i++) {
+          const word = document.createElement('div');
+          word.classList.add('word');
+          word.dataset.index = `adjectives-${i}`; 
+          word.innerHTML = words.adjectives[Math.floor(Math.random() * words.adjectives.length)];
+          wordSelector.appendChild(word);
+
+          word.addEventListener('click', (e) => {
+            if (!e.currentTarget.classList.contains('selected')) {
+              const selectedWord = e.currentTarget.cloneNode(true);
+              e.currentTarget.classList.add('selected');
+
+              insultContainer.appendChild(selectedWord);
+              document.querySelector('.insult-wrapper button').classList.remove('diabled');
+
+              selectedWord.addEventListener('click', (e) => {
+                const $target = e.currentTarget;
+                const id = $target.dataset.index;
+                $target.outerHTML = "";
+                delete $target;
+
+                document.querySelector(`.word-selector [data-index=${id}]`).classList.remove('selected');
+
+                if (document.querySelectorAll('.word-selector [data-index]').length === 0) {
+                  document.querySelector('.insult-wrapper button').classList.add('diabled');
+                }
+              });
+            }
+          });
+        }
+
+        const word = document.createElement('div');
+        word.classList.add('word');
+        word.dataset.index = `plural-11`; 
+        word.innerHTML = 's';
+        wordSelector.appendChild(word);
+
+        word.addEventListener('click', (e) => {
+          if (!e.currentTarget.classList.contains('selected')) {
+            const selectedWord = e.currentTarget.cloneNode(true);
+            e.currentTarget.classList.add('selected');
+
+            insultContainer.appendChild(selectedWord);
+            document.querySelector('.insult-wrapper button').classList.remove('diabled');
+
+            selectedWord.addEventListener('click', (e) => {
+              const $target = e.currentTarget;
+              const id = $target.dataset.index;
+              $target.outerHTML = "";
+              delete $target;
+
+              document.querySelector(`.word-selector [data-index=${id}]`).classList.remove('selected');
+
+              if (document.querySelectorAll('.word-selector [data-index]').length === 0) {
+                document.querySelector('.insult-wrapper button').classList.add('diabled');
+              }
+            });
+          }
+        });
+      }
+
+      loadWords();
+      
+      document.querySelector('.submit').addEventListener('click', () => {
+        const insultWords = insultContainer.querySelectorAll('.word');
+        let theInsult = '';
+
+        for (let i = 0; i < insultWords.length; i++) {
+          if (i === 0) {
+            theInsult = insultWords[i].innerHTML;
+          } else if (insultWords[i].innerHTML === 's') {
+            theInsult += insultWords[i].innerHTML;
+          } else {
+            theInsult += ` ${insultWords[i].innerHTML}`;
+          }
+
+          const $target = insultWords[i];
+          const id = $target.dataset.index;
+          $target.outerHTML = "";
+          delete $target;
+
+          document.querySelector(`.word-selector [data-index=${id}]`).classList.remove('selected');
+        }
+
+        theInsult = `${document.querySelector('.insult-wrapper h2').innerHTML} ${theInsult}`;
+        socket.emit('talk-smack', theInsult);
+      });
+
+      socket.on('talk-smack', (response) => {
+        if (document.querySelector(`[data-id=${response[0]}]`).classList.contains('talking')) {
+          document.querySelector(`[data-id=${response[0]}]`).classList.remove('talking');
+
+          setTimeout(function() {
+            document.querySelector(`[data-id=${response[0]}] .player-speech-bubble`).innerHTML = response[1];
+            document.querySelector(`[data-id=${response[0]}]`).classList.add('talking');
+          }, 300);
+        } else {
+          document.querySelector(`[data-id=${response[0]}] .player-speech-bubble`).innerHTML = response[1];
+          document.querySelector(`[data-id=${response[0]}]`).classList.add('talking');
+        }
+
+        loadWords();
+      });
+
+      const name = document.querySelector('#m');
+      const $playerContainer = document.querySelector('.player-container');
+
+      document.querySelector('form').addEventListener('submit', (e) => {
+        document.querySelector('.modal').classList.add('hide');
+
+        setTimeout(function() {
+          socket.emit('join', name.value);
+          name.value = '';
+        }, 300);
+
+        e.preventDefault();
+      });
+
+      socket.on('update-people', (people) => {
+        const $playerWrapper = document.createElement('div');
+
+        Object.keys(people).forEach((user) => {
+          let $currentPlayer = document.createElement('div');
+          let $currentPlayerAvatarContainer = document.createElement('div');
+          let $currentPlayerAvatar = document.createElement('div');
+          let $currentPlayeSpeechBubble = document.createElement('div');
+          let $currentPlayerName = document.createElement('div');
+
+          $currentPlayer.classList.add('player');
+          $currentPlayerAvatarContainer.classList.add('player-avatar-container');
+          $currentPlayerAvatar.classList.add('player-avatar');
+          $currentPlayeSpeechBubble.classList.add('player-speech-bubble');
+          $currentPlayerName.classList.add('player-name');
+
+          $currentPlayer.dataset.id = user;
+
+          $currentPlayerName.innerHTML = people[user];
+
+          $currentPlayerAvatarContainer.appendChild($currentPlayerAvatar);
+          $currentPlayer.appendChild($currentPlayeSpeechBubble);
+          $currentPlayer.appendChild($currentPlayerAvatarContainer);
+          $currentPlayer.appendChild($currentPlayerName);
+          $playerWrapper.appendChild($currentPlayer);
+        });
+
+        $playerContainer.innerHTML = '';
+        $playerContainer.appendChild($playerWrapper);
+      });
+    </script>
+  </body>
+</html>
